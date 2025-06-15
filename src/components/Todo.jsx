@@ -1,6 +1,24 @@
 import "./Todo.css";
+import Swal from "sweetalert2";
 
 export default function Todo({ task, toggleComplete, deleteTodo, editTodo }) {
+  // Confirm delete function
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteTodo(task.id);
+        Swal.fire("Deleted!", "Your task has been deleted.", "success");
+      }
+    });
+  };
+
   return (
     <div className="Todo">
       <div className="box2">
@@ -28,7 +46,7 @@ export default function Todo({ task, toggleComplete, deleteTodo, editTodo }) {
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button
-          onClick={() => deleteTodo(task.id)}
+          onClick={handleDelete}
           className="del-btn"
           aria-label={`Delete task ${task.task}`}
         >

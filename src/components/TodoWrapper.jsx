@@ -73,12 +73,6 @@ export default function TodoWrapper() {
       .then((res) => res.json())
       .then(() => {
         setTodos(todos.filter((todo) => todo.id !== id));
-        toast.error("Task deleted successfully", {
-          position: "top-right",
-          autoClose: 2500,
-          theme: "colored",
-          transition: Bounce,
-        });
       });
   };
 
